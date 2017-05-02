@@ -1,0 +1,6 @@
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnect\bin\Release\SfdcConnect.dll
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnect\bin\Release\SfdcConnect.pdb
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnect\bin\Release\Newtonsoft.Json.dll
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnect\bin\Release\Newtonsoft.Json.xml
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnect\obj\Release\SfdcConnect.dll
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnect\obj\Release\SfdcConnect.pdb

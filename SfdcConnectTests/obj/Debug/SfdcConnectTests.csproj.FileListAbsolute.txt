@@ -1,0 +1,10 @@
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\bin\Debug\SfdcConnectTests.dll
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\bin\Debug\SfdcConnectTests.pdb
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\bin\Debug\SfdcConnect.dll
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\bin\Debug\SfdcConnect.pdb
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\obj\Debug\SfdcConnectTests.csprojResolveAssemblyReference.cache
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\obj\Debug\SfdcConnectTests.dll
+C:\Users\sfife\Documents\Visual Studio 2015\Projects\SfdcConnect\SfdcConnect\SfdcConnectTests\obj\Debug\SfdcConnectTests.pdb
