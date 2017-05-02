@@ -93,7 +93,8 @@ The custom login completed function runs after the internal login completed func
   await conn.OpenAsync(cancelToken);
 ```
 
-## SOAP API Example
+## API Examples
+### SOAP API Example
 ```C#
   SfdcSoapApi conn = new SfdcSoapApi(true, 36);
 
@@ -108,7 +109,7 @@ The custom login completed function runs after the internal login completed func
   conn.Close();
 ```
 
-## REST API Example
+### REST API Example
 ```C#
   SfdcRestApi conn = new SfdcRestApi(true, 36);
 
@@ -123,7 +124,7 @@ The custom login completed function runs after the internal login completed func
   conn.Close();
 ```
 
-## Metadata API Example
+### Metadata API Example
 ```C#
   SfdcMetadataApi conn = new SfdcMetadataApi(true, 36);
 
@@ -138,7 +139,7 @@ The custom login completed function runs after the internal login completed func
   conn.Close();
 ```
 
-## Apex API Example
+### Apex API Example
 ```C#
   SfdcApexApi conn = new SfdcApexApi(true, 36);
 
