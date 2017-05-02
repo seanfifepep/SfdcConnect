@@ -153,3 +153,46 @@ The custom login completed function runs after the internal login completed func
 
   conn.Close();
 ```
+
+###  Bulk API Example
+```C#
+  SfdcBulkApi conn = new SfdcBulkApi(true, 36);
+
+  conn.Username = username;
+  conn.Password = password;
+  conn.Token = token;
+
+  Job job = conn.CreateJob("Contact", ContentType.CSV, Operations.query, ConcurrencyMode.Parallel, "");
+
+  Batch batch = conn.CreateBatch(job, "SELECT Id FROM Contact", "", "");
+
+  conn.CloseJob(job);
+
+  job = conn.GetJob(job);
+
+  //Wait for the job to complete
+  while (job.IsDone == false)
+  {
+    Thread.Sleep(2000);
+
+    job = conn.GetJob(job);
+  }
+
+  //If the batch failed, let us know, if it didn't download the batch
+  batch = conn.GetBatch(job, batch);
+
+  if (batch.State == "Failed")
+  {
+    //log it
+  }
+  else
+  {
+    //There's no need to download an empty batch for a backup
+    if (batch.NumberRecordsProcessed > 0)
+    {
+        //zip file is downloaded to path
+        string path = System.IO.Path.Combine("C:\\", "Contact.zip");
+        bool success = conn.GetQueryBatchResults(job, batch, path, true);
+    }
+  }
+```
