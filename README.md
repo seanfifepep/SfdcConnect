@@ -161,6 +161,8 @@ The custom login completed function runs after the internal login completed func
   conn.Username = username;
   conn.Password = password;
   conn.Token = token;
+  
+  conn.Open();
 
   Job job = conn.CreateJob("Contact", ContentType.CSV, Operations.query, ConcurrencyMode.Parallel, "");
 
