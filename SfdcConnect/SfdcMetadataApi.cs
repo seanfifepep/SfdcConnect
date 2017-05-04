@@ -1,4 +1,14 @@
-﻿using System;
+/****************************************************************************
+*
+*   File name: SfdcMetadataApi.cs
+*   Author: Sean Fife
+*   Create date: 5/2/2017
+*   Solution: SfdcConnect
+*   Project: SfdcConnect
+*   Description: Includes the class for Salesforce Metadata API Calls
+*
+****************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
