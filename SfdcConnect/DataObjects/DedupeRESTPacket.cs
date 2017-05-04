@@ -1,4 +1,14 @@
-﻿using System;
+/****************************************************************************
+*
+*   File name: DataObjects\DedupeRESTPacket.cs
+*   Author: Sean Fife
+*   Create date: 5/2/2017
+*   Solution: SfdcConnect
+*   Project: SfdcConnect
+*   Description: Includes DedupeRESTPacket class for the custom Apex API endpoint
+*
+****************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
