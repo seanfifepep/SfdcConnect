@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,7 +34,7 @@ namespace SfdcConnect
 
             if (base.CallOptionsValue != null)
             {
-                CallOptions = new CallOptions();
+                CallOptions = new SfdcConnect.ApexObjects.CallOptions();
                 CallOptions.Actor = base.CallOptionsValue.Actor;
                 CallOptions.client = base.CallOptionsValue.client;
                 CallOptions.DidUnderstand = base.CallOptionsValue.DidUnderstand;
@@ -48,7 +48,7 @@ namespace SfdcConnect
 
             if (base.SessionHeaderValue != null)
             {
-                SessionHeader = new SessionHeader();
+                SessionHeader = new SfdcConnect.ApexObjects.SessionHeader();
                 SessionHeader.Actor = base.SessionHeaderValue.Actor;
                 SessionHeader.sessionId = base.SessionHeaderValue.sessionId;
                 SessionHeader.DidUnderstand = base.SessionHeaderValue.DidUnderstand;
@@ -61,19 +61,18 @@ namespace SfdcConnect
             }
 
             Uri url = new Uri(ServerUrl);
-            this.Url = "https://" + url.Host + "/services/Soap/s/" + Version;
-
+            this.Url = ServerUrl.Replace("Soap/u/", "Soap/s/");// + this.ApiEndPoint.Segments[this.ApiEndPoint.Segments.Length - 1];
         }
 
         #region Sfdc - From wsdl
-        private SessionHeader sessionHeaderValueField;
-        private CallOptions callOptionsValueField;
+        public SfdcConnect.ApexObjects.SessionHeader SessionHeader { get; set; }
+        public SfdcConnect.ApexObjects.CallOptions CallOptions { get; set; }
 
-        private DebuggingHeader debuggingHeaderValueField;
-        private PackageVersionHeader packageVersionHeaderValueField;
-        private DebuggingInfo debuggingInfoValueField;
-        private AllowFieldTruncationHeader allowFieldTruncationHeaderValueField;
-        private DisableFeedTrackingHeader disableFeedTrackingHeaderValueField;
+        public DebuggingHeader DebuggingHeaderValue { get; set; }
+        public PackageVersionHeader PackageVersionHeaderValue { get; set; }
+        public DebuggingInfo DebuggingInfoValue { get; set; }
+        public AllowFieldTruncationHeader AllowFieldTruncationHeaderValue { get; set; }
+        public DisableFeedTrackingHeader DisableFeedTrackingHeaderValue { get; set; }
 
         private System.Threading.SendOrPostCallback compileAndTestOperationCompleted;
         private System.Threading.SendOrPostCallback compileClassesOperationCompleted;
@@ -81,84 +80,6 @@ namespace SfdcConnect
         private System.Threading.SendOrPostCallback executeAnonymousOperationCompleted;
         private System.Threading.SendOrPostCallback runTestsOperationCompleted;
         private System.Threading.SendOrPostCallback wsdlToApexOperationCompleted;
-
-        public SessionHeader SessionHeader
-        {
-            get
-            {
-                return this.sessionHeaderValueField;
-            }
-            set
-            {
-                this.sessionHeaderValueField = value;
-            }
-        }
-        public DebuggingHeader DebuggingHeaderValue
-        {
-            get
-            {
-                return this.debuggingHeaderValueField;
-            }
-            set
-            {
-                this.debuggingHeaderValueField = value;
-            }
-        }
-        public PackageVersionHeader PackageVersionHeaderValue
-        {
-            get
-            {
-                return this.packageVersionHeaderValueField;
-            }
-            set
-            {
-                this.packageVersionHeaderValueField = value;
-            }
-        }
-        public CallOptions CallOptions
-        {
-            get
-            {
-                return this.callOptionsValueField;
-            }
-            set
-            {
-                this.callOptionsValueField = value;
-            }
-        }
-        public DebuggingInfo DebuggingInfoValue
-        {
-            get
-            {
-                return this.debuggingInfoValueField;
-            }
-            set
-            {
-                this.debuggingInfoValueField = value;
-            }
-        }
-        public AllowFieldTruncationHeader AllowFieldTruncationHeaderValue
-        {
-            get
-            {
-                return this.allowFieldTruncationHeaderValueField;
-            }
-            set
-            {
-                this.allowFieldTruncationHeaderValueField = value;
-            }
-        }
-        public DisableFeedTrackingHeader DisableFeedTrackingHeaderValue
-        {
-            get
-            {
-                return this.disableFeedTrackingHeaderValueField;
-            }
-            set
-            {
-                this.disableFeedTrackingHeaderValueField = value;
-            }
-        }
 
         /// <remarks/>
         public event compileAndTestCompletedEventHandler compileAndTestCompleted;
@@ -176,10 +97,10 @@ namespace SfdcConnect
 
         #region Synchronous Calls
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptionsValue")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptions")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("DebuggingInfoValue", Direction = System.Web.Services.Protocols.SoapHeaderDirection.Out)]
         [System.Web.Services.Protocols.SoapHeaderAttribute("DebuggingHeaderValue")]
-        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeaderValue")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeader")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("PackageVersionHeaderValue")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace = "http://soap.sforce.com/2006/08/apex", ResponseNamespace = "http://soap.sforce.com/2006/08/apex", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("result")]
@@ -192,8 +113,8 @@ namespace SfdcConnect
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapHeaderAttribute("PackageVersionHeaderValue")]
-        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeaderValue")]
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptionsValue")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeader")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptions")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace = "http://soap.sforce.com/2006/08/apex", ResponseNamespace = "http://soap.sforce.com/2006/08/apex", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("result")]
         public CompileClassResult[] compileClasses([System.Xml.Serialization.XmlElementAttribute("scripts")] string[] scripts)
@@ -205,8 +126,8 @@ namespace SfdcConnect
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapHeaderAttribute("PackageVersionHeaderValue")]
-        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeaderValue")]
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptionsValue")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeader")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptions")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace = "http://soap.sforce.com/2006/08/apex", ResponseNamespace = "http://soap.sforce.com/2006/08/apex", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("result")]
         public CompileTriggerResult[] compileTriggers([System.Xml.Serialization.XmlElementAttribute("scripts")] string[] scripts)
@@ -217,10 +138,10 @@ namespace SfdcConnect
         }
 
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeaderValue")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeader")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("DebuggingHeaderValue")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("AllowFieldTruncationHeaderValue")]
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptionsValue")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptions")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("DisableFeedTrackingHeaderValue")]
         [System.Web.Services.Protocols.SoapHeaderAttribute("DebuggingInfoValue", Direction = System.Web.Services.Protocols.SoapHeaderDirection.Out)]
         [System.Web.Services.Protocols.SoapHeaderAttribute("PackageVersionHeaderValue")]
@@ -236,8 +157,8 @@ namespace SfdcConnect
         /// <remarks/>
         [System.Web.Services.Protocols.SoapHeaderAttribute("DebuggingInfoValue", Direction = System.Web.Services.Protocols.SoapHeaderDirection.Out)]
         [System.Web.Services.Protocols.SoapHeaderAttribute("DebuggingHeaderValue")]
-        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeaderValue")]
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptionsValue")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeader")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptions")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace = "http://soap.sforce.com/2006/08/apex", ResponseNamespace = "http://soap.sforce.com/2006/08/apex", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("result")]
         public RunTestsResult runTests(RunTestsRequest RunTestsRequest)
@@ -248,8 +169,8 @@ namespace SfdcConnect
         }
 
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeaderValue")]
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptionsValue")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("SessionHeader")]
+        [System.Web.Services.Protocols.SoapHeaderAttribute("CallOptions")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace = "http://soap.sforce.com/2006/08/apex", ResponseNamespace = "http://soap.sforce.com/2006/08/apex", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("result")]
         public WsdlToApexResult wsdlToApex(WsdlToApexInfo info)
