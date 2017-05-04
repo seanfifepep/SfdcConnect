@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SfdcConnect;
 using System.Threading.Tasks;
@@ -299,15 +299,62 @@ namespace SfdcConnectTests
 
             conn.Open();
 
-            SfdcConnect.ApexObjects.CompileClassResult[] ccr = conn.compileClasses(new string[] { "public class TestClass12321 { }" });
+            SfdcConnect.ApexObjects.CompileClassResult[] ccr = conn.compileClasses(new string[] { "public class TestClass123212 { }" });
 
             conn.Close();
         }
 
+        //IMPORTANT: This test cannot work on the build server.  Must comment out before commit.
+        //[TestMethod]
+        //public void BulkApiTest()
+        //{
+        //    SfdcBulkApi conn = new SfdcBulkApi(true, 36);
+
+        //    conn.Username = username;
+        //    conn.Password = password;
+        //    conn.Token = token;
+
+        //    conn.Open();
+
+        //    Job job = conn.CreateJob("Contact", ContentType.CSV, Operations.query, ConcurrencyMode.Parallel, "");
+
+        //    Batch batch = conn.CreateBatch(job, "SELECT Id FROM Contact LIMIT 100", "", "");
+
+        //    conn.CloseJob(job);
+
+        //    job = conn.GetJob(job);
+
+        //    //Wait for the job to complete
+        //    while (job.IsDone == false)
+        //    {
+        //        Thread.Sleep(2000);
+
+        //        job = conn.GetJob(job);
+        //    }
+
+        //    //If the batch failed, let us know, if it didn't download the batch
+        //    batch = conn.GetBatch(job, batch);
+
+        //    if (batch.State == "Failed")
+        //    {
+        //        //log it
+        //    }
+        //    else
+        //    {
+        //        //There's no need to download an empty batch for a backup
+        //        if (batch.NumberRecordsProcessed > 0)
+        //        {
+        //            //zip file is downloaded to path
+        //            string path = System.IO.Path.Combine(@"C:\Users\sfife\Desktop\MetaPedeDownloads", "Contact.zip");
+        //            bool success = conn.GetQueryBatchResults(job, batch, path, true);
+        //        }
+        //    }
+        //}
+
         [TestMethod]
-        public void BulkApiTest()
+        public void ApexRestTest()
         {
-            SfdcBulkApi conn = new SfdcBulkApi(true, 36);
+            SfdcRestApi conn = new SfdcRestApi(true, 36);
 
             conn.Username = username;
             conn.Password = password;
@@ -315,39 +362,9 @@ namespace SfdcConnectTests
 
             conn.Open();
 
-            Job job = conn.CreateJob("Contact", ContentType.CSV, Operations.query, ConcurrencyMode.Parallel, "");
+            string value = conn.CustomAPICall("mcjson/getJson", "POST", "{ \"userId\":\"0032C000005vCuM\" }", "application/json", "application/json");
 
-            Batch batch = conn.CreateBatch(job, "SELECT Id FROM Contact LIMIT 100", "", "");
-
-            conn.CloseJob(job);
-
-            job = conn.GetJob(job);
-
-            //Wait for the job to complete
-            while (job.IsDone == false)
-            {
-                Thread.Sleep(2000);
-
-                job = conn.GetJob(job);
-            }
-
-            //If the batch failed, let us know, if it didn't download the batch
-            batch = conn.GetBatch(job, batch);
-
-            if (batch.State == "Failed")
-            {
-                //log it
-            }
-            else
-            {
-                //There's no need to download an empty batch for a backup
-                if (batch.NumberRecordsProcessed > 0)
-                {
-                    //zip file is downloaded to path
-                    string path = System.IO.Path.Combine(@"C:\Users\sfife\Desktop\MetaPedeDownloads", "Contact.zip");
-                    bool success = conn.GetQueryBatchResults(job, batch, path, true);
-                }
-            }
+            conn.Close();
         }
     }
 }
